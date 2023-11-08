@@ -9,7 +9,7 @@
     <div class="auth w-25 m-0 m-auto">
         <h2 class="auth-title">Đăng ký</h2>
 
-        @using (Html.BeginForm("Register","Auth"))
+        @using (Html.BeginForm("Register", "Auth"))
         {
             @Html.AntiForgeryToken()
 
@@ -35,7 +35,15 @@
                     @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label " })
                     <div class="col-md-10">
                         @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @type = "password" } })
-                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger"})
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="ConfirmPassword" class="control-label">Nhập lại mật khẩu</label>
+                    <div class="col-md-10">
+                        <input type="password" id="ConfirmPassword" name="ConfirmPassword" class="form-control">
+                        <span class="text-danger"></span>
                     </div>
                 </div>
 
@@ -50,3 +58,17 @@
         <a href="/Auth">Đăng nhập</a>
     </div>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    $(document).ready(function () {
+        $("#ConfirmPassword").on("blur", function () {
+            var password = $("#Password").val();
+            var confirmPassword = $(this).val();
+            if (password !== confirmPassword) {
+                $(this).next(".text-danger").text("Mật khẩu không khớp");
+            } else {
+                $(this).next(".text-danger").text("");
+            }
+        });
+    });
+</script>

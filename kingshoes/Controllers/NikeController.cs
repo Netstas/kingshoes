@@ -21,6 +21,14 @@ namespace kingshoes.Controllers
             ViewBag.Products = dblist;
             return View();
         }
+        public ActionResult female()
+        {
+
+            var dblist = db.Products.ToList();
+
+            ViewBag.Products = dblist;
+            return View();
+        }
 
         public ActionResult Detail(int? id)
         {
