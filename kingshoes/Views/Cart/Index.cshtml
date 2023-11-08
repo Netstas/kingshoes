@@ -1,0 +1,134 @@
+﻿
+@{
+    ViewBag.Title = "Giỏ hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+<div class="container">
+    <div class="p-30">
+        @if (ViewBag.TotalPrice != 0)
+        {
+            <div class="cart">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col">Sản phẩm</th>
+                            <th scope="col">Tổng Tiền</th>
+                            <th scope="col">Tiền</th>
+                            <th scope="col">Số lượng</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="cart-table">
+                        @foreach (var item in ViewBag.Cart)
+                        {
+                            if (item != null)
+                            {
+
+                                <tr>
+                                    <td class="text-center">
+                                        @{
+                                            var imageNames = item.ListImage.Split(','); // Phân tách danh sách tên tệp
+                                            var firstImageName = imageNames.Length > 0 ? imageNames[0] : null; // Lấy tên tệp đầu tiên hoặc null nếu mảng rỗng
+                                        }
+                                        @if (firstImageName != null)
+                                        {
+                                            <img class="cart-img"
+                                                 src="~/Asset/Uploads/@firstImageName"
+                                                 alt="@item.Name" />
+                                        }
+                                        else if (imageNames.Length > 1)
+                                        {
+                                            // Nếu có nhiều hơn 1 ảnh, thực hiện phân tách và hiển thị ảnh đầu tiên
+                                            var secondImageName = imageNames[0];
+                                            <img class="cart-img"
+                                                 src="~/Asset/Uploads/@secondImageName"
+                                                 alt="@item.Name" />
+                                        }
+
+                                    </td>
+                                    <td>
+                                        <div class="d-block">
+                                            <span>@item.Name</span>
+                                        </div>
+                                    </td>
+                                    <td>@item.TotalPrice</td>
+
+                                    <td>
+                                        @{
+                                            // Tạo một đối tượng CultureInfo với tiếng Việt
+                                            var vietnameseCulture = new System.Globalization.CultureInfo("vi-VN");
+
+                                            // Định dạng giá sản phẩm theo tiền tệ Việt Nam
+                                            var formattedPrice = string.Format(vietnameseCulture, "{0:C}", item.Price);
+                                        }
+                                        <span class="ps-shoe__price"> @formattedPrice </span>
+                                    </td>
+                                    <td>@item.Quantity</td>
+
+                                    <td>
+                                        <a href="@Url.Action("Delete", new { id = item.Id })"
+                                           class="ps-shoe__name">
+                                            <i class="cursor fa-regular fa-circle-xmark"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                            else
+                            {
+                                <p>Chưa có sản phẩm mời bạn quay lại trang chủ.</p>
+                            }
+                        }
+                    </tbody>
+                </table>
+
+                <h3 class="cart-total">
+                    Tổng tiền:
+                    <span id="total-amount">
+                        @{
+
+                            // Tạo một đối tượng CultureInfo với tiếng Việt
+                            var vietnameseCultures = new System.Globalization.CultureInfo("vi-VN");
+
+                            // Định dạng giá sản phẩm theo tiền tệ Việt Nam
+                            var formattedPrices = string.Format(vietnameseCultures, "{0:C}", ViewBag.TotalPrice);
+                            <span class="ps-shoe__price"> @formattedPrices </span>
+                        }
+                    </span>
+                </h3>
+                <div class="text-end w-100">
+                    <form action="/Cart/Checkout" method="post">
+                        @foreach (var item in ViewBag.Cart)
+                        {
+                            <input type="hidden" name="idcart[]" value="@item.Id" />
+                            <input type="hidden" name="ProductId[]" value="@item.ProductId" />
+                            <input type="hidden" name="TotalPrice" value="@ViewBag.TotalPrice" />
+                            <input type="hidden" name="Quantity[]" value="@item.Quantity" />
+                            <input type="hidden" name="Size[]" value="@item.Size" />
+                        }
+                        <button type="submit" class="btn-checkout">
+                            Mua hàng
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        }
+        else
+        {
+            <p class="text-center"> chưa có sản phẩm quay về trang chủ. </p>
+        }
+
+        @*<div class="ps-cart-listing">
+                <div class="cartNull">
+                    <div class="null_cart text-center">
+                        <h1 class="coll-title cart-title text-uppercase">Giỏ hàng</h1>
+
+                        <p class="text-null">Không có sản phẩm nào trong giỏ hàng</p>
+                        <a href="/" class="back-home"> <strong> Về trang chủ</strong></a>
+                    </div>
+                </div>
+            </div>*@
+    </div>
+</div>

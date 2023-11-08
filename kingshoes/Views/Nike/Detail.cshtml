@@ -1,0 +1,331 @@
+﻿
+@{
+    ViewBag.Title = "Chi tiet san pham";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section class="search">
+    <div class="container" data-select2-id="25">
+        <div class="clearfix" data-select2-id="24">
+
+            <form method="GET" action="tim-kiem" data-select2-id="23">
+                <input type="hidden" name="cateid" value="11">
+                <div class="row" role="toolbar" data-select2-id="22">
+
+                    <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 dvtoolbar dvtool input-search" data-select2-id="43">
+                        <div class="form-group" data-select2-id="42">
+                            <label class="label-search">Chọn Size Giày</label>
+                            <select class="form-control col-lg-12 accessible" name="listsize" placeholder="Chọn size" data-select2-id="1" tabindex="-1" style="" aria-hidden="true">
+                                <option value="" data-select2-id="3">Tất cả</option>
+
+                                <option value="3532" data-select2-id="44">41.5</option>
+
+                                <option value="3531" data-select2-id="45">48.5</option>
+
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 dvtoolbar dvtool select-price" data-select2-id="34">
+                        <div class="form-group" data-select2-id="33">
+                            <label class="label-search">Khoảng giá</label>
+                            <select class="form-control col-lg-12 accessible" name="price_range" data-select2-id="7" tabindex="-1" style="" aria-hidden="true">
+                                <option value="" data-select2-id="9">Tất cả</option>
+                                <option value="0-3000000" data-select2-id="35">Dưới 3 Triệu</option>
+                                <option value="3000000-5000000" data-select2-id="36">Từ 3 đến 5 Triệu</option>
+                                <option value="5000000-10000000" data-select2-id="37">Từ 5 đến 10 Triệu</option>
+                                <option value="10000000-15000000" data-select2-id="38">Từ 10 đến 15 Triệu</option>
+                                <option value="15000000-0" data-select2-id="39"> Trên 15 Triệu</option>
+                            </select>
+                        </div>
+
+                    </div>
+                    <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 dvtoolbar dvtool select-price" data-select2-id="21">
+                        <div class="form-group" data-select2-id="20">
+                            <label class="label-search">Sắp xếp theo</label>
+                            <select class="form-control col-lg-12 accessible" name="sort" data-select2-id="10" tabindex="-1" style="" aria-hidden="true">
+                                <option value="giaban_tc" data-select2-id="12">Giá thấp đến cao</option>
+                                <option value="giaban_ct" data-select2-id="29">Giá cao đến thấp</option>
+                                <option value="name_az" data-select2-id="30">Tên A - Z</option>
+                                <option value="name_za" data-select2-id="31">Tên Z - A</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 dvtool btn-search-lock">
+                        <button type="submit" class="btn btn-info btn-registration btn-search btn-lg col-sm-12">Tìm Giày Ngay <i class="fa fa-search"></i></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+<section class="section-breadcrumbs">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <div class="breadcrumbs">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb breadcrumb-light d-flex justify-content-center justify-content-lg-start" itemscope="" itemtype="http://schema.org/BreadcrumbList">
+                            <li class="breadcrumb-item text-nowrap" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+                                <a itemprop="item" href="/">
+                                    <span itemprop="name"><i class="fa-solid fa-house"></i> Trang chủ</span>
+                                </a>
+                                <meta itemprop="position" content="1">
+                            </li>
+                            <li class="breadcrumb-item text-nowrap" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+                                <a itemprop="item" href="/">
+                                    <span itemprop="name">Sản phẩm</span>
+                                </a>
+                                <meta itemprop="position" content="2">
+                            </li>
+                            <li class="breadcrumb-item text-nowrap" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+                                <a itemprop="item" href="/">
+                                    <span itemprop="name">Nike</span>
+                                </a>
+                                <meta itemprop="position" content="3">
+                            </li>
+                            <li class="breadcrumb-item text-nowrap" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+                                <a itemprop="item" href="nike-nam">
+                                    <span itemprop="name">Nam</span>
+                                </a>
+                                <meta itemprop="position" content="4">
+                            </li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="container p-30">
+    <div class="row">
+        <div class="col-6">
+            <div id="page">
+                <div class="row">
+                    <div class="column small-11 small-centered">
+                        <div class="slider slider-single">
+                            @{
+                                var imageNames = @ViewBag.products.ListImage.Split(','); // Phân tách danh sách tên tệp
+                                var firstImageName = imageNames.Length > 0 ? imageNames[0] : null; // Lấy tên tệp đầu tiên hoặc null nếu mảng rỗng
+                            }
+                            @if (firstImageName != null)
+                            {
+                                <img class="lazy iamge-change"
+                                     src="~/Asset/Uploads/@firstImageName"
+                                     alt="@ViewBag.products.Name" />
+                            }
+
+
+                        </div>
+                        <div class="slider slider-nav">
+                            <div>
+                                @foreach (var imageName in ViewBag.products.ListImage.Split(','))
+                                {
+                                    <img src="~/Asset/Uploads/@imageName" class="imageSlider" width="60" height="60" />
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="ps-product--detail">
+                <div class="ps-product__info">
+                    <div class="ps-product__rating">
+                        <div class="br-wrapper br-theme-fontawesome-stars">
+                            <select class="ps-rating-detail" style="display: none;">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                            <div class="br-widget">
+                                <a href="#" data-rating-value="1" data-rating-text="1" class="br-selected"></a>
+                                <a href="#" data-rating-value="2" data-rating-text="2" class="br-selected"></a>
+                                <a href="#" data-rating-value="3" data-rating-text="3" class="br-selected"></a>
+                                <a href="#" data-rating-value="4" data-rating-text="4" class="br-selected"></a>
+                                <a href="#" data-rating-value="5" data-rating-text="5" class="br-selected br-current"></a>
+                                @*<div class="br-current-rating">5</div>*@
+                            </div>
+                        </div>
+                    </div>
+                    <div id="alertsuccess" class="alert alert-success" style="display:none;"></div>
+                    <h1>@ViewBag.products.Name</h1>
+                    <p class="ps-product__category">Mã SP: <strong>@ViewBag.products.Code</strong></p>
+                    <h3 class="ps-product__price">
+                        @{
+                            // Tạo một đối tượng CultureInfo với tiếng Việt
+                            var vietnameseCulture = new System.Globalization.CultureInfo("vi-VN");
+
+                            // Định dạng giá sản phẩm theo tiền tệ Việt Nam
+                            var formattedPrice = string.Format(vietnameseCulture, "{0:C}", ViewBag.products.Price);
+                        }
+                        <b class="new-price">
+                            @formattedPrice
+                        </b>
+                    </h3>
+                    <div class="ps-product__block ps-product__quickview">
+                    </div>
+                    @using (Html.BeginForm("AddToCart", "Cart"))
+
+                    {
+                        <div class="size-color clearfix">
+                            <div class="product-form product-size">
+                                <div class="row">
+                                    <label class="font-weight-bold text-uppercase h6 mb-2 d-block col-12"></label>
+                                    <div class="col-12">
+                                        <ul class="wapper_cb size d-flex flex-wrap justify-content-center justify-content-lg-start">
+
+                                            @{
+                                                var Size = ViewBag.products.Size.Split(',');
+                                                foreach (var size in Size)
+                                                {
+                                                    <li class="cb">
+                                                        <label for="@size">
+                                                            <input type="radio" data-id="2296" value="@size" id="@size" name="Size" class="radio" checked="">
+                                                            <div class="rd_in">@size</div>
+                                                        </label>
+                                                    </li>
+                                                }
+                                            }
+                                            <div class="clear"></div>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="hidden" name="ProductId" value="@ViewBag.products.Id" />
+                        <div class="form-group bg-transparent mb-5 d-block d-sm-flex align-items-sm-center justify-content-center justify-content-lg-start">
+                            <div class="product-form product-qty">
+                                <div class="product-form-group">
+                                    <div class="number_price d-flex justify-content-center">
+                                        <div class="custom">
+                                            <button class="reduced items-count sub" type="button">-</button>
+
+                                            <input type="text" class="input-text qty" name="Quantity" title="Qty" min="1" maxlength="12" id="qty" value="1" readonly="">
+
+                                            <button class="increase items-count add" type="button">+</button>
+                                            <div class="clear"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row m-0 gap-3 w-100">
+                            <div class="col-12 col-lg-5 p-0">
+                                <button class="ps-btn d-block m-0 w-100 mb-10 text-center btn-pro-detail" type="submit"><i class="fa-solid fa-cart-circle-plus"></i> Thêm vào giỏ</button>
+                            </div>
+                            <div class="col-12 col-lg-6 p-0">
+                                <button class="ps-btn btn-buy-now d-block m-0 w-75 mb-10 text-center btn-pro-detail" data-action="buyNow"> Mua ngay <i class="fa-solid fa-arrow-right-to-line"></i></button>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="product p-40">
+        <div class="container">
+            <div class="ps-section__header mb-50 clearfix">
+                <h3 class="ps-section__title" data-mask=" KING AND QUEEN"><a href="san-pham">- KING AND QUEEN</a></h3>
+            </div>
+            <div class="carousel">
+                <div>
+                    <div class="ps-shoes--carousel">
+                        <div class="image-full image-full-king-queen">
+                            <img src="https://kingshoes.vn/data/upload/media/shop-bán-giày-sneaker-chinh-hang-tai-hcm-king-shoes-authentic-real-9-1662451690.jpeg" alt="Shop giày sneaker chính hãng gần đây đến King Shoes" style="opacity: 1;">
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="ps-shoes--carousel">
+                        <div class="image-full image-full-king-queen">
+                            <img src="https://kingshoes.vn/data/upload/media/shop-bán-giày-sneaker-chinh-hang-tai-hcm-king-shoes-authentic-real-9-1662451690.jpeg" alt="Shop giày sneaker chính hãng gần đây đến King Shoes" style="opacity: 1;">
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="ps-shoes--carousel">
+                        <div class="image-full image-full-king-queen">
+                            <img src="https://kingshoes.vn/data/upload/media/shop-bán-giày-sneaker-chinh-hang-tai-hcm-king-shoes-authentic-real-9-1662451690.jpeg" alt="Shop giày sneaker chính hãng gần đây đến King Shoes" style="opacity: 1;">
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="ps-shoes--carousel">
+                        <div class="image-full image-full-king-queen">
+                            <img src="https://kingshoes.vn/data/upload/media/shop-bán-giày-sneaker-chinh-hang-tai-hcm-king-shoes-authentic-real-9-1662451690.jpeg" alt="Shop giày sneaker chính hãng gần đây đến King Shoes" style="opacity: 1;">
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="ps-shoes--carousel">
+                        <div class="image-full image-full-king-queen">
+                            <img src="https://kingshoes.vn/data/upload/media/shop-bán-giày-sneaker-chinh-hang-tai-hcm-king-shoes-authentic-real-9-1662451690.jpeg" alt="Shop giày sneaker chính hãng gần đây đến King Shoes" style="opacity: 1;">
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="ps-shoes--carousel">
+                        <div class="image-full image-full-king-queen">
+                            <img src="https://kingshoes.vn/data/upload/media/shop-bán-giày-sneaker-chinh-hang-tai-hcm-king-shoes-authentic-real-9-1662451690.jpeg" alt="Shop giày sneaker chính hãng gần đây đến King Shoes" style="opacity: 1;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.imageSlider').click(function () {
+            var newImageSrc = $(this).attr('src');
+            $('.iamge-change').attr('src', newImageSrc);
+        });
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        var quantityInput = document.getElementById("qty");
+        var increaseButton = document.querySelector(".increase");
+        var decreaseButton = document.querySelector(".reduced");
+        var addButton = document.querySelector('[data-action="addCart"]');
+
+        // Sự kiện click cho nút tăng
+        increaseButton.addEventListener("click", function () {
+            var currentQuantity = parseInt(quantityInput.value);
+            if (!isNaN(currentQuantity)) {
+                quantityInput.value = currentQuantity + 1;
+                cartInfo.qty = currentQuantity + 1;
+                cartInfo.Total = cartInfo.Price * cartInfo.qty;
+            }
+        });
+
+        // Sự kiện click cho nút giảm
+        decreaseButton.addEventListener("click", function () {
+            var currentQuantity = parseInt(quantityInput.value);
+            if (!isNaN(currentQuantity) && currentQuantity > 1) {
+                quantityInput.value = currentQuantity - 1;
+                cartInfo.qty = currentQuantity - 1;
+                cartInfo.Total = cartInfo.Price * cartInfo.qty;
+            }
+        });
+
+        // Sự kiện click cho nút "Thêm vào giỏ"
+        addButton.addEventListener("click", function () {
+            // Lưu giỏ hàng vào Session (đây là ví dụ đơn giản)
+            // Bạn có thể sử dụng AJAX hoặc Fetch API để gửi thông tin giỏ hàng lên máy chủ
+            var cart = JSON.parse(sessionStorage.getItem('cart')) || [];
+            cart.push(cartInfo);
+            sessionStorage.setItem('cart', JSON.stringify(cart));
+        });
+    });
+
+
+</script>

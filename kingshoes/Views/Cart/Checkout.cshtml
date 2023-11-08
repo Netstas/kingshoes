@@ -1,0 +1,202 @@
+﻿
+@{
+    ViewBag.Title = "Checkout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+}
+
+<div class="container p-40">
+    <div class="row">
+        <div class="col-6">
+            <div class="checkout">
+                <form action="/Cart/Order" method="post" class="checkout-from">
+                    @foreach (var item in ViewBag.resProducts)
+                    {
+                        <input type="hidden" name="NameProduct[]" value="@item.Name" />
+                        foreach (var items in ViewBag.CartsWithSize)
+                        {
+                            if (item.Id == items.CartId)
+                            {
+                                <input type="hidden" name="Size[]" value="@items.Size " />
+                            }
+                        }
+                        foreach (var itemq in ViewBag.CartsWithSize)
+                        {
+                            if (item.Id == itemq.CartId)
+                            {
+                                <input type="hidden" name="Quantity[]" value="@itemq.Quantity" />
+                            }
+                        }
+                    }
+                    <input type="hidden" name="TotalAmount" value="@ViewBag.resPrices" />
+
+                    <div class="mb-3">
+                        <label for="fullname" class="form-label">Họ và Tên</label>
+                        <input type="text" class="form-control" name="Name" required id="fullname" placeholder="Họ và Tên">
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">Số điện thoại</label>
+                        <input type="number" class="form-control" required name="Phone" id="phone" placeholder="Số điện thoại">
+                    </div>
+                    <div class="mb-3">
+                        <label for="address" class="form-label">Địa chỉ</label>
+                        <input type="text" class="form-control w-100" required name="Address" id="Address" placeholder="Địa chỉ">
+                    </div>
+                    <div class="mb-3">
+                        <div class="d-flex gap-2">
+                            <select id="citySelect" class="form-select" name="City" required aria-label="Select a City">
+                                <option value="">Chọn tỉnh/thành phố</option>
+                            </select>
+
+                            <select id="districtSelect" class="form-select" name="District" required aria-label="Select a District">
+                                <option value="">Chọn quận/huyện</option>
+                            </select>
+
+                            <select id="wardSelect" class="form-select" name="Ward" required aria-label="Select a Ward">
+                                <option value="">Chọn Xã/phường</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <button class="btn-checkout btn-cart">Thanh toán</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-6">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Sản phẩm</th>
+                        <th scope="col">Kích thước</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @* @ViewBag.resProducts*@
+                    @foreach (var item in ViewBag.resProducts)
+                    {
+
+                        <tr>
+                            <td class="text-center">
+                                @{
+                                    var imageNames = item.ListImage.Split(','); // Phân tách danh sách tên tệp
+                                    var firstImageName = imageNames.Length > 0 ? imageNames[0] : null; // Lấy tên tệp đầu tiên hoặc null nếu mảng rỗng
+                                }
+                                @if (firstImageName != null)
+                                {
+                                    <img class=""
+                                         src="~/Asset/Uploads/@firstImageName" width="80" height="80" alt="Image">
+                                }
+                                else
+                                {
+                                    <p>No image available</p>
+                                }
+
+                            </td>
+                            <td>
+                                <div class="d-block">
+                                    <span>@item.Name</span>
+                                </div>
+                            </td>
+                            <td>
+                                @foreach (var items in ViewBag.CartsWithSize)
+                                {
+                                    if (item.Id == items.CartId)
+                                    {
+                                        @items.Size
+
+                                    }
+                                }
+                            </td>
+                        </tr>
+                    }
+                    @*@foreach (var itemsize in ViewBag.resSize)
+                            {
+                        }*@
+                </tbody>
+            </table>
+
+            <p class="cart-total">Tổng số lượng: @ViewBag.TotalQuantity</p>
+
+            <h3 class="cart-total">
+                Tổng tiền: <span>
+                    @{
+                        // Tạo một đối tượng CultureInfo với tiếng Việt
+                        var vietnameseCulture = new System.Globalization.CultureInfo("vi-VN");
+
+                        // Định dạng giá sản phẩm theo tiền tệ Việt Nam
+                        var formattedPrice = string.Format(vietnameseCulture, "{0:C}", ViewBag.resPrices);
+                    }
+                    <b class="new-price">
+                        @formattedPrice
+                    </b>
+                </span>
+            </h3>
+
+        </div>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    $(document).ready(function () {
+        // Load cities on page load
+        $.get('/Administrativeunits/GetCities', function (data) {
+            data.forEach(function (city) {
+                $('#citySelect').append($('<option>', {
+                    value: city.Id,
+                    text: city.Name
+                }));
+            });
+        });
+
+        // Handle city selection change
+        $('#citySelect').change(function () {
+            var selectedCityId = $(this).val();
+            $('#districtSelect').empty();
+            $('#wardSelect').empty();
+
+            if (selectedCityId) {
+                $('#districtSelect').append($('<option>', {
+                    value: "",
+                    text: "Chọn quận huyện"
+                }));
+                $('#wardSelect').append($('<option>', {
+                    value: "",
+                    text: "Chọn xã phường"
+                }));
+                $.get('/Administrativeunits/GetDistricts?cityId=' + selectedCityId, function (data) {
+                    data.forEach(function (district) {
+                        $('#districtSelect').append($('<option>', {
+                            value: district.Id,
+                            text: district.Name
+                        }));
+                    });
+                });
+            }
+        });
+
+        // Handle district selection change
+        $('#districtSelect').change(function () {
+            var selectedDistrictId = $(this).val();
+            $('#wardSelect').empty();
+
+            if (selectedDistrictId) {
+                $('#wardSelect').append($('<option>', {
+                    value: "",
+                    text: "Chọn xã phường"
+                }));
+                $.get('/Administrativeunits/GetWards?districtId=' + selectedDistrictId, function (data) {
+                    data.forEach(function (ward) {
+                        $('#wardSelect').append($('<option>', {
+                            value: ward.Id,
+                            text: ward.Name
+                        }));
+                    });
+                });
+            }
+        });
+    });
+
+</script>

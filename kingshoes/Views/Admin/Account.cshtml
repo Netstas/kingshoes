@@ -1,0 +1,65 @@
+﻿@model IEnumerable<kingshoes.Models.User>
+
+@{
+    ViewBag.Title = "Account";
+    Layout = "~/Views/Layout_admin/_Layout.cshtml";
+}
+
+<h2>Account</h2>
+
+<p>
+    @Html.ActionLink("Thêm tài khoản mới", "CreateAccount")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Username)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Phone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Password)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Decentralization)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Username)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Password)
+            </td>
+            <td>
+                @{
+                    if (item.Decentralization == 0)
+                    {
+                        @Html.Raw("admin")
+                    }
+                    else if (item.Decentralization == 1)
+                    {
+                        @Html.Raw("người dùng")
+                    }
+                    else
+                    {
+                        @Html.Raw("Other") // Thay thế bằng giá trị mặc định nếu không phải 0 hoặc 1
+                    }
+                }
+            </td>
+            <td>
+                @Html.ActionLink("Cập nhập", "EditAccount", new { id = item.Id }) |
+                @Html.ActionLink("Xoá", "DeleteAccount", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>

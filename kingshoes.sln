@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34031.279
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "kingshoes", "kingshoes\kingshoes.csproj", "{FA7F4B75-8175-4390-AF3D-52334C66FEAD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FA7F4B75-8175-4390-AF3D-52334C66FEAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA7F4B75-8175-4390-AF3D-52334C66FEAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA7F4B75-8175-4390-AF3D-52334C66FEAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA7F4B75-8175-4390-AF3D-52334C66FEAD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {17A0646B-FF66-41C4-A43B-9445140EDD34}
+	EndGlobalSection
+EndGlobal

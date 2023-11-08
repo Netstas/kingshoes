@@ -1,0 +1,77 @@
+﻿@import url('layout.css');
+@import url('home.css');
+@import url('nike.css');
+
+a {
+    text-decoration: none !important;
+    color: #000 !important;
+}
+
+.menu > li > a, .ps-shoe .ps-shoe__name, .ps-post .ps-post__title, .ps-morelink {
+    font-family: 'Sarabun', sans-serif;
+}
+
+.p-40 {
+    padding-bottom: 40px;
+    padding-top: 40px;
+}
+
+.p-30 {
+    padding-bottom: 30px;
+    padding-top: 30px;
+}
+
+.p-15 {
+    padding: 0 15px;
+}
+
+input, select, textarea {
+    max-width: unset !important;
+}
+
+.btn-checkout {
+    width: 113px;
+    height: 42px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    background: #fcd603;
+}
+
+
+.js .slider-single > div:nth-child(1n+2) {
+    display: none
+}
+
+.js .slider-single.slick-initialized > div:nth-child(1n+2) {
+    display: block
+}
+
+.iamge-change {
+    width: 100%;
+    height: 22rem;
+    object-fit: contain;
+    margin-bottom: 43px;
+}
+.imageSlider {
+    object-fit: contain;
+}
+
+i {
+    cursor: pointer;
+}
+
+/* Đặt phần header-bottom là fixed khi cuộn trang */
+.fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fff; /* Màu nền cho phần fixed */
+    z-index: 9999; /* Đảm bảo hiển thị phía trên các phần khác trên trang */
+}
+
+/* Ẩn phần header__top khi cuộn trang */
+.header__top {
+    display: none;
+}

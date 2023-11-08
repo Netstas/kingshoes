@@ -1,0 +1,195 @@
+﻿@{
+    Layout = null;
+    string username = Session["Username"] as string;
+
+   
+}
+
+<div class="header">
+    <div class="header__top border-bottom">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid">
+                <div class="collapse navbar-collapse justify-content-end"
+                     id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link border-end p-0 pe-2 text-dark header__link"
+                               href="#">👑 King and Queen</a>
+                        </li>
+                        <li class="nav-item">
+                            @if (!string.IsNullOrEmpty(username))
+                            {
+                                <a class="nav-link border-end p-0 pe-2 ps-2 text-dark header__link "
+                                   href="/auth/logout"><i class="fa-solid fa-users"></i><span class="hidden-username">@username</span></a>
+                            }
+                            else
+                            {
+                                <a class="nav-link border-end p-0 pe-2 ps-2 text-dark header__link"
+                                   href="/auth"><i class="fa-solid fa-users"></i> Login</a>
+                            }
+                        </li>
+                        <li class="nav-item d-flex ps-2 align-items-center">
+                            <i class="fa-solid fa-phone"></i> <span> Hotline: </span>
+                            <a class="nav-link p-0 text-dark header__link ps-2 border-0"
+                               href="#">0909300746</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div class="header-bottom d-flex">
+        <div class="container-fluid p-0">
+            <div class="row align-items-center">
+                <div class="w-17 p-0">
+                    <a href="/">
+                        <img src="~/Asset/image/logo/cửa-hàng-giày-sneaker-chính-hàng-uy-tín-nhất-dến-king-shoes-authenti-hcm-6.png" />
+                    </a>
+                </div>
+                <div class="w-67 p-0">
+                    <nav class="navbar navbar-expand-lg">
+                        <div class="container-fluid">
+                            <div class="collapse navbar-collapse justify-content-center"
+                                 id="navbarNav">
+                                <ul class="navbar-nav justify-content-between w-100">
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark header__bottom--link"
+                                           href="#">Giởi thiệu</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark header__bottom--link"
+                                           href="#">Nike</a>
+                                        <ul class="sub-menu p-0">
+                                            <li class="menu-item 2 menu87 border-bottom"
+                                                id="menu87">
+                                                <a href="/nike">Nam</a>
+                                            </li>
+                                            <li class="menu-item 3 menu88" id="menu88">
+                                                <a href="#">Nữ</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark header__bottom--link"
+                                           href="#">
+                                            ADIDAS
+                                        </a>
+                                        <ul class="sub-menu p-0">
+                                            <li class="menu-item 2 menu87 border-bottom"
+                                                id="menu87">
+                                                <a href="#">Nam</a>
+                                            </li>
+                                            <li class="menu-item 3 menu88" id="menu88">
+                                                <a href="#">Nữ</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark header__bottom--link"
+                                           href="#">Jordan</a>
+                                        <ul class="sub-menu p-0">
+                                            <li class="menu-item 2 menu87 border-bottom"
+                                                id="menu87">
+                                                <a href="#">AIR JORDAN</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark header__bottom--link"
+                                           href="#">Yeezy</a>
+                                        <ul class="sub-menu p-0">
+                                            <li class="menu-item 2 menu87 border-bottom"
+                                                id="menu87">
+                                                <a href="#">YEEZY BOOST 350</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark header__bottom--link"
+                                           href="#">Other Brands</a>
+                                        <ul class="sub-menu p-0">
+                                            <li class="menu-item 2 menu87 border-bottom"
+                                                id="menu87">
+                                                <a href="#">SNEAKER AUTHENTIC</a>
+                                            </li>
+                                            <li class="menu-item 3 menu88" id="menu88">
+                                                <a href="#">Giày thể thao chạy bộ -tập gym</a>
+                                            </li>
+                                            <li class="menu-item 3 menu88" id="menu88">
+                                                <a href="#">Giày tennis nike chính hãng</a>
+                                            </li>
+                                            <li class="menu-item 3 menu88" id="menu88">
+                                                <a href="#">Dép Authentic</a>
+                                            </li>
+                                            <li class="menu-item 3 menu88" id="menu88">
+                                                <a href="#">Crep Protect vệ sinh giày Sneaker</a>
+                                            </li>
+                                            <li class="menu-item 3 menu88" id="menu88">
+                                                <a href="#">Giày Thanh Lý</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark header__bottom--link"
+                                           href="#">Sale</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark header__bottom--link"
+                                           href="#">Dây Giày</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark header__bottom--link"
+                                           href="#">Spa Giày</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark header__bottom--link"
+                                           href="#">Liên hệ</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+                <div class="w-27 p-0">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <form action="" method="post">
+                            <div class="form-group">
+                                <input type="text"
+                                       class="header__bottom--form-controll border-0 outline-0 bg-transparent"
+                                       placeholder="Nhập từ tìm kiếm" />
+                                <button class="header__bottom--btn border-0 outline-0 bg-transparent">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                </button>
+                            </div>
+                        </form>
+                        <div class="header__bootom--cart">
+                            <a href="/cart" class="home__bottom--llink-cart">
+                                <i class="fa-solid fa-cart-shopping"></i>
+                                <span class="header__bootom--cart--number">
+                                    @*@if (TempData["TotalQuantity"] == 0) { 
+                                    
+                                    }*@
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    window.addEventListener('scroll', function () {
+        // Khi cuộn trang, kiểm tra vị trí cuộn
+        if (window.scrollY > 100) { // Thay 100 bằng độ cao bạn muốn khi nào header__top ẩn đi
+            document.querySelector('.header__top').style.display = 'none'; // Ẩn header__top
+            document.querySelector('.header-bottom').classList.add('fixed'); // Thêm lớp cho header__bottom
+        } else {
+            document.querySelector('.header__top').style.display = 'block'; // Hiển thị header__top
+            document.querySelector('.header-bottom').classList.remove('fixed'); // Loại bỏ lớp cho header__bottom
+        }
+    });
+
+</script>

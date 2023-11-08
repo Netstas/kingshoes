@@ -1,0 +1,23 @@
+﻿.back-home {
+    margin: 15px 0;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+img.cart-img {
+    width: 75px;
+    height: 75px;
+    object-fit: cover;
+    margin: 0 auto;
+}
+
+.cart-total {
+    text-align: right;
+    color: red;
+}
+
+    .cart-total span {
+        font-size: 18px;
+    }
+

@@ -1,0 +1,72 @@
+﻿@model IEnumerable<kingshoes.Models.Product>
+
+@{
+    ViewBag.Title = "Product";
+    Layout = "~/Views/Layout_admin/_Layout.cshtml";
+}
+
+<p>
+    @Html.ActionLink("Thêm mới sản phẩm", "CreateProduct")
+</p>
+<table class="table border border-1 border-dark">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Code)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Size)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ListImage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Number)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Category)
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var product in ViewBag.dblist)
+    {
+        <tr>
+            <td>  @product.Name </td>
+            <td>
+                @{
+                    var imageNames = product.ListImage.Split(','); // Phân tách danh sách tên tệp
+                    var firstImageName = imageNames.Length > 0 ? imageNames[0] : null; // Lấy tên tệp đầu tiên hoặc null nếu mảng rỗng
+                }
+                @if (firstImageName != null)
+                {
+                    <img src="~/Asset/Uploads/@firstImageName" width="50" height="50" />
+                }
+            </td>
+            <td>@product.Price</td>
+            <td>
+                @*@{
+                        //var sizes = product.Size.Split(','); // Tách chuỗi Size thành mảng
+                    }
+                    @foreach (var size in sizes)
+                    {
+                        @size<br />
+                    }*@
+                @product.Size
+            </td>
+            <td>@product.Gender</td>
+            <td>@product.Code</td>
+            <td>@product.CategoryName</td>
+
+            <td>
+                @Html.ActionLink("Cập nhập", "EditProduct", new { id = product.Id }) |
+                @Html.ActionLink("Xoá", "DeleteProduct", new { id = product.Id })
+            </td>
+        </tr>
+    }
+
+</table>
